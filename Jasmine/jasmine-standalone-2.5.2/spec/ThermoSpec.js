@@ -35,10 +35,26 @@ describe('Thermostat', function() {
     });
   });
 
-  describe('powerSave max temp', function(){
-    it('sets a max temp of 25C when PS is on', function(){
-      thermo3000.powerSave();
-      expect(thermo3000.MAX_PS_TEMP).toBe(25);
+  describe('powerSave mode on default', function(){
+    it('turns on powerSave mode when iniated', function(){
+      thermo3000.powerSaveOn();
+      expect(thermo3000.powerSaveisOn).toBe(true);
     });
   });
+
+    describe('powerSave On max temp', function(){
+      it('sets a max temp of 25C when PS is on', function(){
+        thermo3000.powerSaveOn();
+        expect(thermo3000.maxTemp).toBe(MAX_PS_TEMP);
+      });
+    });
+
+    describe('powerSave Off max temp', function(){
+      it('sets a max temp of 32C when PS is off', function(){
+        thermo3000.powerSaveOff();
+        expect(thermo3000.maxTemp).toBe(MAX_SYS_TEMP);
+      });
+    });
+
+
 });
