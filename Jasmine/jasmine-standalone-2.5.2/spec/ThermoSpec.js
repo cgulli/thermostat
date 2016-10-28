@@ -56,5 +56,38 @@ describe('Thermostat', function() {
       });
     });
 
+    describe('System Reset', function(){
+      it('resets temperature to default of 20C', function(){
+        thermo3000.reset();
+        expect(thermo3000.temp).toBe(TEMP_DEFAULT);
+      });
+    });
+
+    describe('Low-Usage Message', function(){
+      it('gives Low-Usage message when temp set <18C', function(){
+        thermo3000.temp = 17;
+        expect(
+          thermo3000.displayUsage()
+        ).toBe('Low-Usage');
+      });
+    });
+
+    describe('Medium-Usage Message', function(){
+      it('gives Medium-Usage message when temp set <18C', function(){
+        thermo3000.temp = 19;
+        expect(
+          thermo3000.displayUsage()
+        ).toBe('Medium-Usage');
+      });
+    });
+
+    describe('High-Usage Message', function(){
+      it('gives High-Usage message when temp set <18C', function(){
+        thermo3000.temp = 26;
+        expect(
+          thermo3000.displayUsage()
+        ).toBe('High-Usage');
+      });
+    });
 
 });
